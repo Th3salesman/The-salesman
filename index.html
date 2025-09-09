@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cada 'NO' te acerca más al 'SÍ' millonario - The Closers & Influencer Virtual</title>
+    <style>
+        /* Importar fuentes */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        
+        /* Variables CSS */
+        :root {
+            --primary-red: #ff4757;
+            --primary-blue: #3742fa;
+            --dark-bg: #1e272e;
+            --light-bg: #f8f9fa;
+            --text-dark: #2c3e50;
+            --text-light: #ffffff;
+            --accent-gold: #ffd700;
+            --success-green: #2ed573;
+            --gradient-red: linear-gradient(135deg, #ff4757 0%, #ff3838 100%);
+            --gradient-blue: linear-gradient(135deg, #3742fa 0%, #2f3542 100%);
+            --shadow-light: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-heavy: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Header con navegación sticky */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-red);
+            color: var(--text-light);
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Botones mejorados */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.6s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: var(--text-light);
+            color: var(--primary-red);
+            box-shadow: var(--shadow-light);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--text-light);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-light);
+            color: var(--primary-red);
+            transform: translateY(-3px);
+        }
+
+        .btn-closers {
+            background: var(--gradient-red);
+            color: var(--text-light);
+            box-shadow: var(--shadow-light);
+        }
+
+        .btn-influencer {
+            background: var(--gradient-blue);
+            color: var(--text-light);
+            box-shadow: var(--shadow-light);
+        }
+
+        .btn-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Container general */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Secciones de productos */
+        .product-section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        /* The Closers Section */
+        .closers-section {
+            background: var(--light-bg);
+        }
+
+        .closers-section .section-title {
+            color: var(--primary-red);
+        }
+
+        .closers-section .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-red);
+            border-radius: 2px;
+        }
+
+        /* Influencer Section */
+        .influencer-section {
+            background: var(--dark-bg);
+            color: var(--text-light);
+        }
+
+        .influencer-section .section-title {
+            color: var(--primary-blue);
+        }
+
+        .influencer-section .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-blue);
+            border-radius: 2px;
+        }
+
+        /* Product Cards */
+        .product-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .product-info {
+            animation: slideInFromLeft 1s ease;
+        }
+
+        .product-image-container {
+            position: relative;
+            animation: fadeInUp 1s ease;
+        }
+
+        .product-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: var(--shadow-heavy);
+            transition: transform 0.3s ease;
+        }
+
+        .product-image:hover {
+            transform: scale(1.05);
+        }
+
+        .price-tag {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            background: var(--accent-gold);
+            color: var(--text-dark);
+            padding: 1rem;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-light);
+            animation: pulse 2s infinite;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: var(--text-light);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-red);
+        }
+
+        .influencer-section .feature-card {
+            background: #34495e;
+            color: var(--text-light);
+        }
+
+        .influencer-section .feature-card::before {
+            background: var(--gradient-blue);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary-red);
+        }
+
+        .influencer-section .feature-title {
+            color: var(--primary-blue);
+        }
+
+        /* CTA Sections */
+        .cta-section {
+            background: var(--gradient-red);
+            color: var(--text-light);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 3rem 0;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section.influencer-cta {
+            background: var(--gradient-blue);
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .urgency-text {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            font-weight: 600;
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 4rem 0;
+            background: var(--light-bg);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial {
+            background: var(--text-light);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--primary-red);
+            opacity: 0.3;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--primary-red);
+        }
+
+        .video-testimonials {
+            margin-top: 5rem;
+            text-align: center;
+        }
+
+        .video-testimonials-title {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 177.78%; /* 16:9 Aspect Ratio is now 9:16 */
+            height: 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 4rem 0;
+            background: var(--text-light);
+        }
+
+        .faq-item {
+            background: var(--light-bg);
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: var(--primary-red);
+            color: var(--text-light);
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #e03946;
+        }
+
+        .faq-answer {
+            padding: 1.5rem;
+            display: none;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 6rem 1rem 3rem;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .product-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-title {
+                font-size: 2rem;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .cta-section {
+                padding: 3rem 1rem;
+                margin: 2rem 0;
+            }
+        }
+
+        /* Elementos flotantes */
+        .floating-element {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+        }
+
+        .floating-btn {
+            background: var(--success-green);
+            color: var(--text-light);
+            padding: 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: var(--shadow-heavy);
+            animation: pulse 2s infinite;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">💎 Transforma Tu Vida</div>
+            <nav class="nav-links">
+                <a href="#closers">The Closers</a>
+                <a href="#influencer">Influencer Virtual</a>
+                <a href="#testimonios">Testimonios</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🚀 Transforma Tu Vida Financiera</h1>
+            <p>Descubre los secretos para generar ingresos reales desde casa con nuestros cursos exclusivos. Miles de estudiantes ya han cambiado su vida.</p>
+            <div class="hero-cta">
+                <a href="#closers" class="btn btn-primary">🎯 Ver The Closers</a>
+                <a href="#influencer" class="btn btn-secondary">👤 Ver Influencer Virtual</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Closers Section -->
+    <section id="closers" class="product-section closers-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">The Closers</h2>
+                <p class="section-subtitle">La Comunidad Exclusiva para Generar tu Primer Millón</p>
+            </div>
+            
+            <div class="product-content">
+                <div class="product-info">
+                    <h3 style="color: var(--primary-red); font-size: 2rem; margin-bottom: 1rem;">🎯 No es un curso, es una TRANSFORMACIÓN</h3>
+                    <p><strong>Si no trabajas, los resultados no aparecerán.</strong> Pero si estás listo para el cambio, te prometemos que con <strong>solo 1 hora diaria</strong> de aplicación, en 6 meses serás la persona más inteligente de la habitación.</p>
+                    
+                    <div class="urgency-text">
+                        "Te garantizo que en 6 meses serás una persona con una amplia gama de ideas, desarrollado facilidad para detectar y aplicar oportunidades, y sobre todo, comenzando a verlo reflejado en tus bolsillos."
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; margin: 2rem 0; flex-wrap: wrap;">
+                        <span style="background: var(--success-green); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600;">✅ Garantía 30 días</span>
+                        <span style="background: var(--accent-gold); color: var(--text-dark); padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600;">🏆 +5000 estudiantes</span>
+                        <span style="background: var(--primary-red); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600;">🔥 Acceso inmediato</span>
+                    </div>
+                </div>
+                
+                <div class="product-image-container">
+                    <img class="product-image" src="closer1.png" alt="The Closers Community">
+                    <div class="price-tag">$589</div>
+                </div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">💰</span>
+                    <h3 class="feature-title">Genera Ingresos Reales</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>✅ <strong>E-commerce completo</strong>: desde básico hasta FB Ads avanzado</li>
+                        <li>✅ <strong>Estrategias de negocio</strong>: comercio, contabilidad básica</li>
+                        <li>✅ <strong>Finanzas personales</strong>: tarjetas de crédito y apalancamiento</li>
+                        <li>✅ <strong>Negocio Uber</strong>: domina este mercado millonario</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🤝</span>
+                    <h3 class="feature-title">Comunidad Elite</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>✅ <strong>Networking exclusivo</strong>: comerciantes y empresarios exitosos</li>
+                        <li>✅ <strong>Mentorías grupales</strong>: sesiones en vivo cada semana</li>
+                        <li>✅ <strong>Soporte 24/7</strong>: nunca estarás solo en el proceso</li>
+                        <li>✅ <strong>Eventos presenciales</strong>: conexiones en persona</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🚀</span>
+                    <h3 class="feature-title">El Siguiente Nivel</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>✅ <strong>Primer millón en 8 meses</strong>: promedio comprobado</li>
+                        <li>✅ <strong>Estrategias de escalamiento</strong>: multiplica tus ingresos</li>
+                        <li>✅ <strong>Inversiones avanzadas</strong>: haz que el dinero trabaje para ti</li>
+                        <li>✅ <strong>Negocios exponenciales</strong>: sistemas automatizados</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <div class="cta-content">
+                    <h3 class="cta-title">🔥 OFERTA ESPECIAL POR TIEMPO LIMITADO</h3>
+                    <p class="cta-subtitle">Únete a The Closers y comienza tu transformación HOY mismo</p>
+                    <div class="urgency-text">
+                        ⏰ Solo quedan 24 horas para obtener acceso con precio especial!!
+                    </div>
+                    <a href="https://go.hotmart.com/P86263635G" class="btn btn-primary btn-pulse" style="font-size: 1.3rem; padding: 1.5rem 3rem;">
+                        🚀 ¡QUIERO UNIRME AHORA POR SOLO $589!
+                    </a>
+                    <p style="margin-top: 1rem; opacity: 0.9;">✅ Garantía de devolución de 30 días | ✅ Acceso inmediato | ✅ Soporte incluido</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Influencer Virtual Section -->
+    <section id="influencer" class="product-section influencer-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Influencer Virtual</h2>
+                <p class="section-subtitle">Monetiza en Redes Sociales sin Mostrar tu Cara</p>
+            </div>
+            
+            <div class="product-content">
+                <div class="product-image-container">
+                    <img class="product-image" src="ia2.png" alt="Influencer Virtual">
+                    <div class="price-tag">$$</div>
+                </div>
+                
+                <div class="product-info">
+                    <h3 style="color: var(--primary-blue); font-size: 2rem; margin-bottom: 1rem;">👤 Crea tu Imperio Digital</h3>
+                    <p>Aprende a crear y monetizar tu propio <strong>influencer virtual</strong> para generar ingresos en redes sociales y plataformas de pago, incluso sin una computadora potente. Con un solo pago, obtén todo lo que necesitas para empezar.</p>
+                    
+                    <div class="urgency-text" style="border-left-color: var(--primary-blue);">
+                        💡 Método probado por miles de creators que generan $2,000+ mensuales sin mostrar su cara ni usar equipos costosos
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; margin: 2rem 0; flex-wrap: wrap;">
+                        <span style="background: var(--success-green); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600;">✅ Sin equipos costosos</span>
+                        <span style="background: var(--accent-gold); color: var(--text-dark); padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600;">📱 Solo necesitas celular</span>
+                        <span style="background: var(--primary-blue); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600;">🤖 100% Virtual</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">👤</span>
+                    <h3 class="feature-title">Crea tu Avatar Perfecto</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>✅ <strong>Diseño desde cero</strong>: personaje único y atractivo</li>
+                        <li>✅ <strong>Fotos profesionales</strong>: diferentes lugares y estilos</li>
+                        <li>✅ <strong>Personalidad definida</strong>: conecta con tu audiencia</li>
+                        <li>✅ <strong>Herramientas gratuitas</strong>: no necesitas Photoshop</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">📈</span>
+                    <h3 class="feature-title">Monetización Efectiva</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>✅ <strong>OnlyFans, Fanvue, Patreon, LoyalFans</strong>: estrategias que funcionan</li>
+                        <li>✅ <strong>Redes sociales</strong>: Instagram, TikTok, Twitter</li>
+                        <li>✅ <strong>Contenido premium</strong>: maximiza tus ganancias</li>
+                        <li>✅ <strong>Marketing viral</strong>: técnicas de crecimiento rápido</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🛠️</span>
+                    <h3 class="feature-title">Herramientas y Soporte</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>✅ <strong>Apps especializadas</strong>: funciona en cualquier dispositivo</li>
+                        <li>✅ <strong>Templates listos</strong>: ahorra tiempo y esfuerzo</li>
+                        <li>✅ <strong>Grupo WhatsApp</strong>: soporte directo y comunidad</li>
+                        <li>✅ <strong>Actualizaciones constantes</strong>: nuevas estrategias cada mes</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="cta-section influencer-cta">
+                <div class="cta-content">
+                    <h3 class="cta-title">💎 LANZA TU INFLUENCER VIRTUAL HOY</h3>
+                    <p class="cta-subtitle">Comienza a generar ingresos pasivos sin mostrar tu cara</p>
+                    <div class="urgency-text">
+                        
+                    </div>
+                    <a href="https://go.hotmart.com/C92194478P" class="btn btn-primary btn-pulse" style="font-size: 1.3rem; padding: 1.5rem 3rem;">
+                        🚀 ¡CREAR MI INFLUENCER VIRTUAL!
+                    </a>
+                    <p style="margin-top: 1rem; opacity: 0.9;">✅ Acceso inmediato | ✅ Soporte en WhatsApp | ✅ Método 100% comprobado</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonios">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" style="color: var(--text-dark);">💬 Lo Que Dicen Nuestros Estudiantes</h2>
+                <p class="section-subtitle" style="color: var(--text-dark);">Historias reales de transformación y éxito</p>
+            </div>
+            
+            
+
+            <!-- Sección de Videos de Testimonios -->
+            <div class="video-testimonials">
+                <h3 class="video-testimonials-title">Mira Sus Historias de Transformación en Video</h3>
+                <div class="video-grid">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/jNQXAC9IVRw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" style="color: var(--text-dark);">❓ Preguntas Frecuentes</h2>
+                <p class="section-subtitle" style="color: var(--text-dark);">Resolvemos todas tus dudas</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    ¿Cuánto tiempo necesito invertir diariamente?
+                </div>
+                <div class="faq-answer">
+                    Con The Closers necesitas al menos 1 hora diaria de aplicación. Para el Influencer Virtual, con 2 horas diarias es suficiente para ver resultados en el primer mes.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    ¿Hay garantía de devolución?
+                </div>
+                <div class="faq-answer">
+                    Sí, ambos cursos tienen garantía de devolución de 30 días sin preguntas. Si no estás satisfecho, te devolvemos el 100% de tu dinero.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    ¿Necesito experiencia previa?
+                </div>
+                <div class="faq-answer">
+                    No, ambos cursos están diseñados para principiantes. Te guiamos paso a paso desde cero hasta generar tus primeros ingresos.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    ¿Qué equipos necesito?
+                </div>
+                <div class="faq-answer">
+                    Solo necesitas una computadora o smartphone con internet. No requieres equipos costosos ni software especializado.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Cada 'NO' te acerca más al 'SÍ' millonario. Todos los derechos reservados.</p>
+            <p>Cursos respaldados por Hotmart - Plataforma líder en educación digital</p>
+        </div>
+    </footer>
+
+    <!-- Floating CTA -->
+    <div class="floating-element">
+        <a href="#closers" class="floating-btn">
+            💎 ¡Comienza Ya!
+        </a>
+    </div>
+
+    <script>
+        // FAQ Toggle
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            if (answer.style.display === "block") {
+                answer.style.display = "none";
+            } else {
+                answer.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
